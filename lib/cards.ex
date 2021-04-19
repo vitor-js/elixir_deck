@@ -1,5 +1,11 @@
 defmodule Cards do
+  @moduledoc """
+      Provides methods for creating and handling a deck of cards
+  """
 
+  @doc """
+    return a list strings representing a deck of playin cards
+  """
   def create_deck do
     values = ["Ace", "Two", "Three","Four", "Five"]
     suits = ["Spades","Clubs","Hearts","Diamonds"]
@@ -10,14 +16,39 @@ defmodule Cards do
 
   end
 
+
   def shuffle(deck) do
     Enum.shuffle(deck)
   end
+
+
+  @doc """
+      Determines wheter a deck contains a given card
+
+  ## Examples
+
+      iex> deck = Cards.create_deck
+      iex> Cards.contains?(deck, "Ace of Spades")
+      true
+
+  """
 
   def contains?(deck, card) do
       Enum.member?(deck, card)
   end
 
+  @doc """
+    Divides a deck into a hand and the remainder of the deck.
+    The "hand_size" arguments indicates how many cards should be in the hand.
+
+  ## Examples
+
+      iex> deck = Cards.create_deck
+      iex> {hand, deck} = Cards.deal(deck,1)
+      iex> hand
+      ["Ace of Spades"]
+
+  """
   def deal(deck, hand_size) do
     Enum.split(deck,hand_size)
   end
@@ -35,6 +66,7 @@ defmodule Cards do
       :error -> "That file does not exist"
     end
   end
+
 
   def create_hand(hand_size) do
     Cards.create_deck
